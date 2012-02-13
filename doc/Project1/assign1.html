@@ -1,0 +1,252 @@
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title> Program Design Patterns: Assignment 1</title>
+</head>
+
+<body>
+<h1> Assignment 1  </h1>
+
+
+<h2> Due date </h2>
+<UL> 
+<LI> Due by 11.59 PM EST on Friday, Feb 24th.
+
+</UL>
+
+<BR> 
+
+Submit your code as per the provided instructions. A signup sheet will
+be provided to you during class to setup an appointment with the TA to
+provide a demo of your project. 
+
+</UL>
+
+<h3> Updates </h3>
+
+<UL>
+</UL>
+
+<h3> Assignment Goal </h3>
+
+Through this assignment you will learn to use threads and apply design
+principles.
+
+
+<h3> Team Work </h3>
+Team work is NOT allowed. You have to work alone on this project. You
+CANNOT collaborate or discuss the design, implementation, or debugging
+ideas with any other students.
+
+<h3> Programming Language </h3>
+You are required to program using Java.
+
+<h3> Compilation Method </h3> 
+
+<UL>
+
+<LI> Your code should compile and run on <I> bingsuns </I> or the <I>
+debian-pods </I> in the Computer Science lab in the Engineering
+Building via ANT.
+
+</UL> 
+
+
+<h3> Policy on sharing of code </h3>
+
+<LI> EVERY line of code that you submit in this assignment should be
+written by you or be part of the code template provided for this
+assignment. Do NOT show your code to any other group. Our
+code-comparison software can very easily detect similarities.
+
+<LI> Post to the listserv if you have any questions about the
+requirements. Do NOT post your code to the listserv asking for help
+with debugging. 
+</UL>
+
+<H2>  Project Description  </H2>
+
+<H3> Generating factors of a large number using threads </H3>
+
+<UL>
+
+<LI> You are required to write multithreaded code to find all factors
+for a given positive integer.
+
+<LI> Accept the following as command line arguments. Note that the
+command line arguments are specified in the build.xml file as
+properties of the "java" command for the target "run".
+
+<UL>
+<LI> the integer for which factors need to be found
+<LI> the number of threads that should to used for this application
+<LI> Debug level
+</UL>
+
+
+<LI> Enforce the following as part of Input Verification
+
+<UL>
+<LI> The input integer should be positive.
+<LI> The number of threads should be number between 1 and 5.
+<LI> The value of DEBUG_VALUE should be between 5 and 10.
+</UL>
+
+
+<LI> Use Debug in the following way:
+<UL>
+<LI> If Debug value is 9 or greater: print evey debug statement
+
+<LI> If Debug value is 7 or greater: print entry into constructors, and entry/exit from the thread's run method
+
+<LI> If Debug is 5 or greater, check the FIXMEs in the code template for what needs to be printed.
+
+</UL>
+
+<LI> Write code to take care of all the FIXMEs in the provided code template.
+
+<LI> The grading instructions explain the points distribution for this assignment.
+
+</UL>
+
+
+</UL> 
+
+<H2>  Code Organization </H2>
+
+<UL>
+<LI> Your directory and file structure should NOT be different than what has been provided in the code template.
+</UL>
+
+
+<H2>  Code Templates </H2>
+<UL> 
+<LI> Use the following <a href="./threadsStarter.tar.gz">code template</a>. <font color="red">[Updated: Thu Feb 10 10:38:40 EST 2011]</font>
+<LI> You can untar using the following commands on bingsuns (or any *nix machine)
+     <UL> 
+     <LI> gunzip  threadStarter.tar.gz
+     <LI> tar -xvf threadStarter.tar
+     </UL>
+
+<LI> You can comple and run the code with the following commands in
+the directory threadsStarter. Note that the file build.xml controls
+the processing of compiling, creating jar files, and running the code.
+
+<UL>
+<LI> ant compile
+<LI> ant run
+</UL>
+</UL>
+
+<H2>  Submission </H2>
+
+<UL>
+
+<LI> Read <a href="../../../README.txt"> this</a> file for general
+guidelines on how to prepare a README for your submission.
+
+<LI> Run "ant clean" and make sure all class files, object files (.o
+files), executables, and backup files are deleted before creating a
+zip or tarball. To create a tarball, you need to "tar" and then "gzip"
+your top level directory. Create a tarball of the directory
+lastName_firstName_assign1. We should be able to compile and execute
+your code using the makefile and instructions you provide in the
+README.txt file.
+
+<LI> Instructions to create a tarball
+<UL>
+<LI> Make sure you are one level above the directory firstName_LastName_assign1.
+<LI> tar -cvf firstName_LastName_assign1.tar firstName_LastName_assign1/
+<LI> gzip firstName_LastName_assign1.tar
+</UL>
+
+
+<LI> <B> BONUS </B>: A better way to create a tarzip file for submission is to make it
+an ANT target. You can add the creation of tar and gzip in the
+build.xml file. If you are the first to post a working version of the
+build.xml addition for tar and zip, then you will get 2 bonus points
+for this assignment.
+
+<LI> Do NOT send your assignment as an email attachment to be considered as submission.
+
+<LI> Upload your assignment to Blackboard, assignment-1.
+
+
+</UL>
+
+
+<H3> General Requirements </H3> 
+<UL>
+
+<LI> Start early and avoid panic during the last couple of days.
+
+<LI> Submit a README.txt file (placed at the top level). The
+README.txt file should be filled out as described in that file.
+
+<LI> You need to provide exception handling in your code. 
+
+<LI> Separate out code appropriately into methods, one for each purpose. 
+
+<LI> You should document your code. The comments should not exceed 72
+coloums in width. Use javadoc style comments if you are coding in Java.
+
+<LI>  Do not use "import XYZ.*" in your code. Instead, import each required type individually.
+
+<LI> EVERY line of code that you submit in this assignment should be
+written by you, or be part of the code template provided for
+this assignment, or be from a website/book that you have cited in the
+README. Do NOT show your code to any other group. Our code-comparison
+software can very easily detect similarities.
+
+
+<LI> All objects, in Java, that may be
+needed for debugging purposes should have the "toString()" method
+defined. By default, just place a toString() in every class.
+
+<LI> Every class that has data members,
+should have corresponding accessors and mutators (unless the data
+member(s) is/are for use just within the method).
+
+<LI> If a class does not implement an
+interface, you should have a good justification for it. For example,
+it is ok to have an abstract base class and a derived class, wherein
+both do not implement interfaces. Note that the Driver code is written
+by end-users, and so the Results class must implement the interface,
+or else the source code for Results will have to be exposed to the
+end-user.
+
+</UL>
+
+<H3> Late Submissions </H3>
+
+<UL>
+
+<LI> The policy for late submissions is that you will lose 10% of the
+grade for each day that your submission is delayed.
+
+</UL>
+
+
+<H3> Grading Guidelines </H3>
+
+Grading guidelines have been posted <a href="./assign1Grading.html">here</a>.
+
+
+
+<P>
+<P>
+
+<address>mgovinda at cs dot binghamton dot edu</address>
+Back to <a href="../../index.html"> CS 342/542: Programming Design Patterns</a>
+<!-- hhmts start -->
+<!-- hhmts end -->
+</body> </html>
+
+
+
+
+
+
+
+
+
