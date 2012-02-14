@@ -10,7 +10,7 @@ public class Driver {
     int numberOfThreads = 0;
     int debugValue = 0;
 
-    if (args.length != 3) {
+    if(args.length != 3) {
       System.err.println("Usage is: ant compile [PRIME_NUMBER] [NUMBER_OF_THREADS] [DEBUG_LEVEL} \n");
       System.exit(-1);
     }
@@ -19,7 +19,7 @@ public class Driver {
         primeToTest = Integer.parseInt(args[0]);
         numberOfThreads = Integer.parseInt(args[1]);
         debugValue = Integer.parseInt(args[2]);
-    } catch (NumberFormatException e) {
+    } catch(NumberFormatException e) {
         System.err.println("All argument must be integers");
         System.exit(1);
     }
@@ -34,7 +34,7 @@ public class Driver {
       // FIXME: wait for the threads to get done
       // adjust this sleep duration as needed
       Thread.sleep(10);
-    } catch (InterruptedException ie) {
+    } catch(InterruptedException ie) {
       // interruption of the main thread is fatal, so exit
       ie.printStackTrace();
       System.exit(-1);

@@ -12,7 +12,7 @@ public class Factorizer implements Runnable {
   // FIXME: define an explicit value constructor that initializes all the data members
 
   public void run() {
-    if (Debug.DEBUG_VALUE > 5) {
+    if(Debug.DEBUG_VALUE > 5) {
       System.out.println("Work started by factorizer thread: " + this);
     }
 
