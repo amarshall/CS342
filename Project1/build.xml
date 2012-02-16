@@ -1,6 +1,7 @@
 <project name="toyThreads" default="compile" basedir=".">
   <property name="build.compiler" value="modern" />
   <property name="src"            value="src" />
+  <property name="doc"            value="doc" />
   <property name="BUILD"          value="build" />
   <property name="classes"        value="${BUILD}/classes" />
 
@@ -26,6 +27,10 @@
            deprecation="off"
            includeantruntime="false"
     />
+  </target>
+
+  <target name="doc">
+    <javadoc sourcepath="${src}" destdir="${doc}" />
   </target>
 
   <target name="jar">
