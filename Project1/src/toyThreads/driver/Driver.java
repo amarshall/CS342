@@ -1,47 +1,86 @@
 package toyThreads.driver;
 
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+
 import toyThreads.primeFactors.Factorizer;
 import toyThreads.util.Debug;
+import toyThreads.util.LogFormatter;
 import toyThreads.primeFactors.Results;
 
 public class Driver {
+  private static int number;
+  private static int numberOfThreads;
+  private static List<Thread> threads;
+
   public static void main(String[] args) {
-    int primeToTest = 0;
-    int numberOfThreads = 0;
-    int debugValue = 0;
-
     if(args.length != 3) {
-      System.err.println("Usage is: ant compile [PRIME_NUMBER] [NUMBER_OF_THREADS] [DEBUG_LEVEL} \n");
-      System.exit(-1);
+      System.err.println("Usage is: ant run <number> <number_of_threads> <debug_level>");
+      System.exit(128);
     }
 
     try {
-        primeToTest = Integer.parseInt(args[0]);
-        numberOfThreads = Integer.parseInt(args[1]);
-        debugValue = Integer.parseInt(args[2]);
+      if(!Debug.setLogLevel(Integer.parseInt(args[2]))) {
+        System.err.println("Debug level must be between 5 & 10, inclusive.");
+        System.exit(128);
+      }
+      number = Integer.parseInt(args[0]);
+      numberOfThreads = Integer.parseInt(args[1]);
+      Debug.LOGGER.info("Received args: " + Arrays.deepToString(args));
     } catch(NumberFormatException e) {
-        System.err.println("All argument must be integers");
-        System.exit(1);
+      System.err.println("All argument must be integers");
+      System.exit(128);
+    } finally {}
+
+    if(!numberIsValid()) {
+      System.err.println("Number must be greater than zero.");
+      System.exit(128);
+    }
+    if(!numberOfThreadsIsValid()) {
+      System.err.println("Number of threads must be between 1 & 5, inclusive.");
+      System.exit(128);
     }
 
-    // FIXME: set the DEBUG_VALUE in Debug.java
-
-    // FIXME: if DEBUG_LEVEL is greater than 2, print all the argument received
-
-    // FIXME: create numberOfThreads and to each thread pass an instance of Factorizer as argument
-
+    createThreads();
+    startThreads();
     try {
-      // FIXME: wait for the threads to get done
-      // adjust this sleep duration as needed
-      Thread.sleep(10);
-    } catch(InterruptedException ie) {
-      // interruption of the main thread is fatal, so exit
-      ie.printStackTrace();
-      System.exit(-1);
+      waitForThreadsToFinish();
+    } catch(InterruptedException e) {
+      e.printStackTrace();
+      System.exit(1);
+    } finally {}
+
+    System.out.println("Results: " + Results.getInstance());
+  }
+
+  private static boolean numberIsValid() {
+    return number > 0;
+  }
+
+  private static boolean numberOfThreadsIsValid() {
+    return numberOfThreads >= 1 && numberOfThreads <= 5;
+  }
+
+  private static void createThreads() {
+    threads = new ArrayList<Thread>();
+    int range = number / numberOfThreads;
+    for(int i = 1, start = 1; i <= numberOfThreads; ++i, start += range + 1) {
+      int end = (i == numberOfThreads) ? number : start + range;
+      Factorizer factorizer = new Factorizer(i, number, start, end);
+      threads.add(new Thread(factorizer));
     }
+  }
 
-    // FIXME; print the factors using the printFactors() method of the Results class
+  private static void startThreads() {
+    for(Thread thread : threads) {
+      thread.start();
+    }
+  }
 
-    System.out.println("\n Good Bye \n");
+  private static void waitForThreadsToFinish() throws InterruptedException {
+    for(Thread thread : threads) {
+      thread.join();
+    }
   }
 }
