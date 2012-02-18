@@ -3,12 +3,14 @@ Project 1
 Author: J. Andrew Marshall <jmarsha6@binghamton.edu>
 
 PURPOSE: Through this assignment you will learn to use threads and apply design principles.
-PERCENT COMPLETE:
-PARTS THAT ARE NOT COMPLETE:
-BUGS:
+PERCENT COMPLETE: 100%
+PARTS THAT ARE NOT COMPLETE: None
+BUGS: None
 SAMPLE OUTPUT:
+  INFO: Received args: [123456791, 3, 6]
+  Results: [1, 123456791]
 TO COMPILE: ant compile
 TO RUN: ant run
-EXTRA CREDIT:
-BIBLIOGRAPHY:
-ACKNOWLEDGEMENT:
+EXTRA CREDIT: n/a
+BIBLIOGRAPHY: n/a
+ACKNOWLEDGEMENT: n/a
