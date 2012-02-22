@@ -29,7 +29,7 @@ public class Factorizer implements Runnable {
   public void run() {
     Debug.LOGGER.finer("Starting Factorizer thread " + id);
 
-    for(int potentialFactor = startValue; potentialFactor <= endValue; ++potentialFactor) {
+    for(int potentialFactor = startValue; potentialFactor <= endValue / 2; ++potentialFactor) {
       if(number % potentialFactor == 0) {
         Results.getInstance().add(potentialFactor);
       }
