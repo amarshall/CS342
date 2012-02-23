@@ -52,4 +52,7 @@ public class Factorizer {
   public String toString() {
     return "<number: " + number + ", numberOfThreads: " + numberOfThreads + ">";
   }
+
+  public int getNumber() { return number; }
+  public int getNumberOfThreads() { return numberOfThreads; }
 }

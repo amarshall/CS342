@@ -46,4 +46,8 @@ public class FactorizerThread extends Thread implements Runnable {
   public String toString() {
     return "<ID: " + getId() + ", number: " + number + ", startValue: " + startValue + ", endValue: " + endValue + ">";
   }
+
+  public int getNumber() { return number; }
+  public int getStartValue() { return startValue; }
+  public int getEndValue() { return endValue; }
 }
