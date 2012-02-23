@@ -13,8 +13,8 @@ import toyThreads.util.LogFormatter;
 public class Driver {
   private static int number;
   private static int numberOfThreads;
-  private static List<Thread> threads;
   private static Set<Integer> results;
+  private static List<Thread> threads;
 
   public static void main(String[] args) {
     if(args.length != 3) {

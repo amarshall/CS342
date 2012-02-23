@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import toyThreads.util.Debug;
 import toyThreads.factors.Results;
+import toyThreads.util.Debug;
 
 public class Factorizer {
   private int number;

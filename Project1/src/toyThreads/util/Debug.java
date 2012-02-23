@@ -19,6 +19,8 @@ public class Debug {
   private Debug() {}
 
   /**
+   * Sets the log level to the given level, or, if invalid, level 5.
+   *
    * @param l The level to set logging to, between 5 and 10.
    * @return If the level given was valid.
    */
