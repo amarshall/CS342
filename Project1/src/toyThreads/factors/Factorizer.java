@@ -34,7 +34,7 @@ public class Factorizer {
     int range = number / numberOfThreads;
     for(int i = 1, start = 1; i <= numberOfThreads; ++i, start += range + 1) {
       int end = (i == numberOfThreads) ? number : start + range;
-      Thread thread = new FactorizerThread(i, number, start, end, results);
+      Thread thread = new FactorizerThread(number, start, end, results);
       threads.add(thread);
     }
 
