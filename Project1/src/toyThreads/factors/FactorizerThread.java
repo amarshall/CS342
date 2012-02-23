@@ -1,9 +1,9 @@
-package toyThreads.primeFactors;
+package toyThreads.factors;
 
 import java.util.Set;
 
 import toyThreads.util.Debug;
-import toyThreads.primeFactors.Results;
+import toyThreads.factors.Results;
 
 public class FactorizerThread extends Thread implements Runnable {
   private int id;

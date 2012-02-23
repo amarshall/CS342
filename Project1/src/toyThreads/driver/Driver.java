@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import toyThreads.primeFactors.Factorizer;
+import toyThreads.factors.Factorizer;
+import toyThreads.factors.Results;
 import toyThreads.util.Debug;
 import toyThreads.util.LogFormatter;
-import toyThreads.primeFactors.Results;
 
 public class Driver {
   private static int number;

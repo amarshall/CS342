@@ -1,4 +1,4 @@
-package toyThreads.primeFactors;
+package toyThreads.factors;
 
 import java.util.AbstractSet;
 import java.util.Collections;
