@@ -1,5 +1,7 @@
 package toyThreads.primeFactors;
 
+import java.util.Set;
+
 import toyThreads.util.Debug;
 import toyThreads.primeFactors.Results;
 
@@ -8,6 +10,7 @@ public class Factorizer implements Runnable {
   private int number;
   private int startValue;
   private int endValue;
+  private Set<Integer> results;
 
   /**
    * @param id An ID for the thread; should be unique.
@@ -15,12 +18,13 @@ public class Factorizer implements Runnable {
    * @param startValue The value to start checking at (inclusive).
    * @param endValue The value to stop checking at (inclusive).
    */
-  public Factorizer(int id, int number, int startValue, int endValue) {
+  public Factorizer(int id, int number, int startValue, int endValue, Set<Integer> results) {
     Debug.LOGGER.finer("Entered Factorizer.Factorizer()");
     this.id = id;
     this.number = number;
     this.startValue = startValue;
     this.endValue = endValue;
+    this.results = results;
   }
 
   /**
@@ -31,7 +35,7 @@ public class Factorizer implements Runnable {
 
     for(int potentialFactor = startValue; potentialFactor <= endValue / 2; ++potentialFactor) {
       if(number % potentialFactor == 0) {
-        Results.getInstance().add(potentialFactor);
+        results.add(potentialFactor);
       }
     }
 

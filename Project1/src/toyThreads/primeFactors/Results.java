@@ -9,19 +9,11 @@ import java.util.TreeSet;
 import toyThreads.util.Debug;
 
 public class Results extends AbstractSet<Integer> implements Set<Integer> {
-  private static final Results singleton = new Results();
   private Set<Integer> results;
 
-  private Results() {
+  public Results() {
     Debug.LOGGER.finer("Entered Results.Results()");
     results = Collections.synchronizedSet(new TreeSet<Integer>());
-  }
-
-  /**
-   * @return The singleton Results instance
-   */
-  public static Results getInstance() {
-    return singleton;
   }
 
   /**

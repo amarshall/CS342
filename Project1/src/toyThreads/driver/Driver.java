@@ -3,6 +3,7 @@ package toyThreads.driver;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import toyThreads.primeFactors.Factorizer;
 import toyThreads.util.Debug;
@@ -13,6 +14,7 @@ public class Driver {
   private static int number;
   private static int numberOfThreads;
   private static List<Thread> threads;
+  private static Set<Integer> results;
 
   public static void main(String[] args) {
     if(args.length != 3) {
@@ -42,6 +44,7 @@ public class Driver {
       System.exit(128);
     }
 
+    results = new Results();
     createThreads();
     startThreads();
     try {
@@ -51,7 +54,7 @@ public class Driver {
       System.exit(1);
     } finally {}
 
-    System.out.println("Results: " + Results.getInstance());
+    System.out.println("Results: " + results);
   }
 
   private static boolean numberIsValid() {
@@ -67,7 +70,7 @@ public class Driver {
     int range = number / numberOfThreads;
     for(int i = 1, start = 1; i <= numberOfThreads; ++i, start += range + 1) {
       int end = (i == numberOfThreads) ? number : start + range;
-      Factorizer factorizer = new Factorizer(i, number, start, end);
+      Factorizer factorizer = new Factorizer(i, number, start, end, results);
       threads.add(new Thread(factorizer));
     }
   }
