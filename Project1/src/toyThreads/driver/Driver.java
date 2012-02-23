@@ -18,7 +18,7 @@ public class Driver {
 
   public static void main(String[] args) {
     if(args.length != 3) {
-      System.err.println("Usage is: ant run <number> <number_of_threads> <debug_level>");
+      System.err.println("Arguments are: <number> <number_of_threads> <debug_level>");
       System.exit(128);
     }
 
