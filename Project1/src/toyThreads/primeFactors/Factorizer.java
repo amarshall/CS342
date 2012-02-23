@@ -1,45 +1,48 @@
 package toyThreads.primeFactors;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import toyThreads.util.Debug;
 import toyThreads.primeFactors.Results;
 
-public class Factorizer implements Runnable {
-  private int id;
+public class Factorizer {
   private int number;
-  private int startValue;
-  private int endValue;
+  private int numberOfThreads;
   private Set<Integer> results;
+  private List<Thread> threads;
 
   /**
-   * @param id An ID for the thread; should be unique.
-   * @param number The number to factor
-   * @param startValue The value to start checking at (inclusive).
-   * @param endValue The value to stop checking at (inclusive).
+   * @param number The number to factor.
+   * @param numberOfThreads The number of threads to start.
+   * @param results The set to which the results will be added.
    */
-  public Factorizer(int id, int number, int startValue, int endValue, Set<Integer> results) {
+  public Factorizer(int number, int numberOfThreads, Set<Integer> results) {
     Debug.LOGGER.finer("Entered Factorizer.Factorizer()");
-    this.id = id;
     this.number = number;
-    this.startValue = startValue;
-    this.endValue = endValue;
+    this.numberOfThreads = numberOfThreads;
     this.results = results;
+    threads = new ArrayList<Thread>();
   }
 
   /**
-   * Begins factoring and adding the results
+   * Starts all the threads; does not return until all threads are
+   * finished
    */
-  public void run() {
-    Debug.LOGGER.finer("Starting Factorizer thread " + id);
-
-    for(int potentialFactor = startValue; potentialFactor <= endValue / 2; ++potentialFactor) {
-      if(number % potentialFactor == 0) {
-        results.add(potentialFactor);
-      }
+  public void run() throws InterruptedException {
+    int range = number / numberOfThreads;
+    for(int i = 1, start = 1; i <= numberOfThreads; ++i, start += range + 1) {
+      int end = (i == numberOfThreads) ? number : start + range;
+      Thread thread = new FactorizerThread(i, number, start, end, results);
+      threads.add(thread);
     }
 
-    Debug.LOGGER.finer("Exited Factorizer thread " + id);
+    for(Thread thread : threads) { thread.start(); }
+
+    results.add(number);
+
+    for(Thread thread : threads) { thread.join(); }
   }
 
   /**
@@ -47,6 +50,6 @@ public class Factorizer implements Runnable {
    *   for inspection.
    */
   public String toString() {
-    return "<ID: " + id + ", number: " + number + ", startValue: " + startValue + ", endValue: " + endValue + ">";
+    return "<number: " + number + ", numberOfThreads: " + numberOfThreads + ">";
   }
 }

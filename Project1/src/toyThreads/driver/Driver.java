@@ -45,10 +45,9 @@ public class Driver {
     }
 
     results = new Results();
-    createThreads();
-    startThreads();
+    Factorizer factorizer = new Factorizer(number, numberOfThreads, results);
     try {
-      waitForThreadsToFinish();
+      factorizer.run();
     } catch(InterruptedException e) {
       e.printStackTrace();
       System.exit(1);
@@ -63,27 +62,5 @@ public class Driver {
 
   private static boolean numberOfThreadsIsValid() {
     return numberOfThreads >= 1 && numberOfThreads <= 5;
-  }
-
-  private static void createThreads() {
-    threads = new ArrayList<Thread>();
-    int range = number / numberOfThreads;
-    for(int i = 1, start = 1; i <= numberOfThreads; ++i, start += range + 1) {
-      int end = (i == numberOfThreads) ? number : start + range;
-      Factorizer factorizer = new Factorizer(i, number, start, end, results);
-      threads.add(new Thread(factorizer));
-    }
-  }
-
-  private static void startThreads() {
-    for(Thread thread : threads) {
-      thread.start();
-    }
-  }
-
-  private static void waitForThreadsToFinish() throws InterruptedException {
-    for(Thread thread : threads) {
-      thread.join();
-    }
   }
 }
