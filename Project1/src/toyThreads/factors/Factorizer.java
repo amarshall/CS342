@@ -23,7 +23,7 @@ public class Factorizer implements MathThreadRunner {
     Debug.LOGGER.finer("Entered Factorizer.Factorizer()");
     this.number = number;
     this.numberOfThreads = numberOfThreads;
-    results = Collections.synchronizedSet(new TreeSet<Integer>());
+    results = Collections.synchronizedSortedSet(new TreeSet<Integer>());
     threads = new ArrayList<Thread>();
   }
 
@@ -63,5 +63,9 @@ public class Factorizer implements MathThreadRunner {
 
   public int getNumber() { return number; }
   public int getNumberOfThreads() { return numberOfThreads; }
+
+  /**
+   * @return The (synchronized) set of results.
+   */
   public Set<Integer> getResults() { return results; }
 }
