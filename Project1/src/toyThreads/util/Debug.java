@@ -22,9 +22,8 @@ public class Debug {
    * Sets the log level to the given level, or, if invalid, level 5.
    *
    * @param l The level to set logging to, between 5 and 10.
-   * @return If the level given was valid.
    */
-  public static boolean setLogLevel(int l) {
+  public static void setLogLevel(int l) {
     Level level;
     switch(l) {
       case 9:
@@ -44,6 +43,5 @@ public class Debug {
         break;
     }
     LOGGER.setLevel(level);
-    return l >=5 && l <= 10;
   }
 }

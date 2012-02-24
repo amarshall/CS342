@@ -22,7 +22,10 @@ public class Driver {
     }
 
     try {
-      if(!Debug.setLogLevel(Integer.parseInt(args[2]))) {
+      int debugLevel = Integer.parseInt(args[2]);
+      if(debugLevelIsValid(debugLevel)) {
+        Debug.setLogLevel(debugLevel);
+      } else {
         System.err.println("Debug level must be between 5 & 10, inclusive.");
         System.exit(128);
       }
@@ -53,6 +56,10 @@ public class Driver {
     } finally {}
 
     System.out.println("Results: " + factorizer.getResults());
+  }
+
+  private static boolean debugLevelIsValid(int dl) {
+    return dl >= 5 && dl <= 10;
   }
 
   private static boolean numberIsValid() {
