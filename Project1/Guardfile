@@ -1,0 +1,17 @@
+require 'guard/guard'
+
+module ::Guard
+  class Ant < ::Guard::Guard
+    def start
+      run_on_change nil
+    end
+
+    def run_on_change(paths)
+      system %q{bash -ic "ant compile"}
+    end
+  end
+end
+
+guard 'ant' do
+  watch /.*\.java/
+end
