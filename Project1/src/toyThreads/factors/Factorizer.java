@@ -65,7 +65,7 @@ public class Factorizer implements MathThreadRunner {
   public int getNumberOfThreads() { return numberOfThreads; }
 
   /**
-   * @return The (synchronized) set of results.
+   * @return The (sorted and synchronized) set of results.
    */
   public Set<Integer> getResults() { return results; }
 }
