@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import toyThreads.MathThreadRunner;
 import toyThreads.factors.Factorizer;
 import toyThreads.util.Debug;
 import toyThreads.util.LogFormatter;
@@ -42,7 +43,7 @@ public class Driver {
       System.exit(128);
     }
 
-    Factorizer factorizer = new Factorizer(number, numberOfThreads);
+    MathThreadRunner factorizer = new Factorizer(number, numberOfThreads);
     factorizer.start();
     try {
       factorizer.waitForThreadsToFinish();

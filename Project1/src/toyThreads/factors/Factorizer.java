@@ -6,9 +6,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import toyThreads.MathThreadRunner;
 import toyThreads.util.Debug;
 
-public class Factorizer {
+public class Factorizer implements MathThreadRunner {
   private int number;
   private int numberOfThreads;
   private Set<Integer> results;
