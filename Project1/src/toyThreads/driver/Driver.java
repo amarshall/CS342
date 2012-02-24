@@ -6,14 +6,12 @@ import java.util.List;
 import java.util.Set;
 
 import toyThreads.factors.Factorizer;
-import toyThreads.factors.Results;
 import toyThreads.util.Debug;
 import toyThreads.util.LogFormatter;
 
 public class Driver {
   private static int number;
   private static int numberOfThreads;
-  private static Set<Integer> results;
   private static List<Thread> threads;
 
   public static void main(String[] args) {
@@ -44,16 +42,16 @@ public class Driver {
       System.exit(128);
     }
 
-    results = new Results();
-    Factorizer factorizer = new Factorizer(number, numberOfThreads, results);
+    Factorizer factorizer = new Factorizer(number, numberOfThreads);
+    factorizer.start();
     try {
-      factorizer.run();
+      factorizer.waitForThreadsToFinish();
     } catch(InterruptedException e) {
       e.printStackTrace();
       System.exit(1);
     } finally {}
 
-    System.out.println("Results: " + results);
+    System.out.println("Results: " + factorizer.getResults());
   }
 
   private static boolean numberIsValid() {
