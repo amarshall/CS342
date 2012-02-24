@@ -61,7 +61,11 @@ public class Factorizer implements MathThreadRunner {
     return "<number: " + number + ", numberOfThreads: " + numberOfThreads + ">";
   }
 
+  /**
+   * @return The number that is being factored
+   */
   public int getNumber() { return number; }
+
   public int getNumberOfThreads() { return numberOfThreads; }
 
   /**
