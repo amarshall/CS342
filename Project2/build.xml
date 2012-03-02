@@ -1,0 +1,52 @@
+<project name="studentOrientation" default="compile" basedir=".">
+  <property name="build.compiler" value="modern" />
+  <property name="src"            value="src" />
+  <property name="doc"            value="doc" />
+  <property name="BUILD"          value="build" />
+  <property name="classes"        value="${BUILD}/classes" />
+
+  <target name="compile" depends="studentOrientation" />
+
+  <target name="clean">
+    <delete dir="${BUILD}" />
+  </target>
+
+  <target name="prepare">
+    <mkdir dir="${BUILD}" />
+    <mkdir dir="${classes}" />
+  </target>
+
+  <target name="studentOrientation" depends="prepare">
+    <javac srcdir="${src}"
+           includes="studentOrientation/**"
+           excludes="**/package.html"
+           destdir="${classes}"
+           classpath="${classes}"
+           debug="on"
+           optimize="on"
+           deprecation="off"
+           includeantruntime="false"
+    />
+  </target>
+
+  <target name="doc">
+    <javadoc sourcepath="${src}" destdir="${doc}" />
+  </target>
+
+  <target name="jar">
+    <mkdir dir="${BUILD}/jar" />
+    <jar destfile="${BUILD}/jar/studentOrientation.jar" basedir="${BUILD}/classes">
+      <manifest>
+        <attribute name="Main-Class" value="studentOrientation.driver.Driver" />
+      </manifest>
+    </jar>
+  </target>
+
+  <target name="run" depends="jar">
+    <java jar="${BUILD}/jar/studentOrientation.jar" fork="true">
+      <arg value="123456791" />
+      <arg value="3" />
+      <arg value="6" />
+    </java>
+  </target>
+</project>
