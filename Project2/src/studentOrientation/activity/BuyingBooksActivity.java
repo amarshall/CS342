@@ -9,6 +9,10 @@ public class BuyingBooksActivity implements Activity {
   private int effort;
   private int timeInMinutes;
 
+  /**
+   * @param bookstore The bookstore the books are being bought at.
+   * @param cost The retail cost of the books being bought.
+   */
   public BuyingBooksActivity(Bookstore bookstore, Currency cost) {
     this.carbonFootprint = 100;
     this.cost = cost.multiply(bookstore.getCostFactor());

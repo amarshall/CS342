@@ -13,18 +13,30 @@ public class StudentOrientation {
   private DormSelectionActivity dormSelectionActivity;
   private RegistrationActivity registrationActivity;
 
+  /**
+   * @param activity The book buying activity
+   */
   public void setBuyingBooksActivity(BuyingBooksActivity activity) {
     buyingBooksActivity = activity;
   }
 
+  /**
+   * @param activity The campus tour activity
+   */
   public void setCampusTourActivity(CampusTourActivity activity) {
     campusTourActivity = activity;
   }
 
+  /**
+   * @param activity The dorm selection activity
+   */
   public void setDormSelectionActivity(DormSelectionActivity activity) {
     dormSelectionActivity = activity;
   }
 
+  /**
+   * @param activity The registration activity
+   */
   public void setRegistrationActivity(RegistrationActivity activity) {
     registrationActivity = activity;
   }

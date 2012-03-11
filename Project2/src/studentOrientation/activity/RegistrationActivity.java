@@ -8,6 +8,12 @@ public abstract class RegistrationActivity implements Activity {
   private int effort;
   private int timeInMinutes;
 
+  /**
+   * @param carbonFootprint The carbon footprint in tons of C02.
+   * @param cost The cost to take the tour.
+   * @param effort The effort in calories.
+   * @param timeInMinutes The time in minutes.
+   */
   public RegistrationActivity(int carbonFootprint, Currency cost, int effort, int timeInMinutes) {
     this.carbonFootprint = carbonFootprint;
     this.cost = cost;
