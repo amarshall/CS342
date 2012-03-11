@@ -7,7 +7,7 @@ import studentOrientation.activity.RegistrationActivity;
 
 import studentOrientation.util.Currency;
 
-public class StudentOrientation {
+public class StudentOrientation implements Orientation {
   private BuyingBooksActivity buyingBooksActivity;
   private CampusTourActivity campusTourActivity;
   private DormSelectionActivity dormSelectionActivity;

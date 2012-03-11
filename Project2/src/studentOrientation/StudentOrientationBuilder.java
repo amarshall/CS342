@@ -6,12 +6,12 @@ import studentOrientation.activity.DormSelectionActivity;
 import studentOrientation.activity.RegistrationActivity;
 
 public class StudentOrientationBuilder {
-  private StudentOrientation orientation;
+  private Orientation orientation;
 
   /**
    * @param orientation The orientation to build
    */
-  public StudentOrientationBuilder(StudentOrientation orientation) {
+  public StudentOrientationBuilder(Orientation orientation) {
     this.orientation = orientation;
   }
 

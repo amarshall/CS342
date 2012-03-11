@@ -18,12 +18,13 @@ import studentOrientation.bookstore.UniversityBookstore;
 import studentOrientation.bookstore.MandoBooks;
 import studentOrientation.util.Currency;
 
+import studentOrientation.Orientation;
 import studentOrientation.StudentOrientation;
 import studentOrientation.StudentOrientationBuilder;
 
 public class Driver {
   public static void main(String[] args) {
-    StudentOrientation orientation = new StudentOrientation();
+    Orientation orientation = new StudentOrientation();
     StudentOrientationBuilder builder = new StudentOrientationBuilder(orientation);
 
     // Bookstore bookstore = new UniversityBookstore();
