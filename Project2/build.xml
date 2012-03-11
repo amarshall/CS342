@@ -42,6 +42,13 @@
     </jar>
   </target>
 
+  <target name="tar" depends="clean">
+    <tar compression="gzip" destfile="Marshall_John_Sussman_Evan_assign2.tar.gz">
+      <tarfileset dir=".">
+      </tarfileset>
+    </tar>
+  </target>
+
   <target name="run" depends="jar">
     <java jar="${BUILD}/jar/studentOrientation.jar" fork="true">
       <arg value="123456791" />
