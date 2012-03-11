@@ -23,6 +23,22 @@ public class StudentOrientation {
       registrationActivity != null;
   }
 
+  public BuyingBooksActivity getBuyingBooksActivity() {
+    return buyingBooksActivity;
+  }
+
+  public CampusTourActivity getCampusTourActivity() {
+    return campusTourActivity;
+  }
+
+  public DormSelectionActivity getDormSelectionActivity() {
+    return dormSelectionActivity;
+  }
+
+  public RegistrationActivity getRegistrationActivity() {
+    return registrationActivity;
+  }
+
   /**
    * @param activity The book buying activity
    */
