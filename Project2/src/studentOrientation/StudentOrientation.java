@@ -14,6 +14,16 @@ public class StudentOrientation {
   private RegistrationActivity registrationActivity;
 
   /**
+   * @return True if all activities have been set
+   */
+  public boolean complete() {
+    return buyingBooksActivity != null &&
+      campusTourActivity != null &&
+      dormSelectionActivity != null &&
+      registrationActivity != null;
+  }
+
+  /**
    * @param activity The book buying activity
    */
   public void setBuyingBooksActivity(BuyingBooksActivity activity) {
