@@ -1,0 +1,242 @@
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title> Programming Design Patterns: Assignment 3</title>
+</head>
+
+<body>
+<h1> Assignment 3 </h1>
+
+
+<h2> Due date </h2>
+<UL> 
+<LI> Due by 11.59 PM EST on April 12th.
+
+</UL>
+
+<BR> 
+
+Submit your code as per the provided instructions. A signup sheet will
+be provided to you during class to setup an appointment with the TA to
+provide a demo of your project. 
+
+</UL>
+
+<h3> Updates </h3>
+
+<UL>
+<LI>  Sun Mar 25 23:38:05 EDT 2012: assignment posted 
+</UL>
+
+<h3> Assignment Goal </h3>
+
+Apply the design principles and patterns you have learned so far to
+develop and test code for the given problem.
+
+
+<h3> Team Work </h3>
+
+<UL>
+
+<LI> You are required to work in teams of two students on this
+project. Choose a team partner from the class, with whom you did not
+work in assignment 2. You CANNOT collaborate or discuss the design,
+implementation, or debugging ideas with any other team.
+
+<LI> Both team members should be familiar with all aspects of the
+code. During the demo, the TA will randomly pick one of the team
+members to demo and answer questions. Failure to show familiarity with
+any part of the code will result in deduction of 50% of the assignment
+grade for both team members.
+
+</UL>
+
+
+<h3> Programming Language </h3>
+You are required to program this project in Java.
+
+<h3> Compilation Method </H3> 
+
+<UL>
+<LI> You are required to use </I> ANT </I> for the following:
+  <UL>
+   <LI> Compiling the code 
+   <LI> running the code
+   <LI> Generating a tarball for submission
+   <LI> Generating javadocs
+</UL>
+
+<LI> Your code should compile and run on <I> bingsuns </I> or the <I>
+debian-pods </I> in the Computer Science lab in the Engineering
+Building.
+
+</UL> 
+
+
+<h3> Policy on sharing of code </h3>
+
+<LI> EVERY line of code that you submit in this assignment should be
+written by your team or be part of the code template provided for this
+assignment. Do NOT show your code to any other group. Our
+code-comparison software can very easily detect similarities.
+
+<LI> Post to the listserv if you have any questions about the
+requirements. Do NOT post your code to the listserv asking for help
+with debugging. However, it is okay to post design/concept questions
+on programming in Java/C/C++.
+
+</UL>
+
+<H2> Project Description  </H2>
+
+<H3> Search based Customer Support for Trouble Shooting </H3>
+
+The dSeaGate Portable Drive vendor wants to provide an online trouble
+shooter for customers. Your task is to design the engine for this purpose. The requirements are the following:
+
+<UL> 
+
+<LI> dSeaGate has four distinct products. It has 3 versions of each of
+these products. For each product, it also has an ArrayList of strings.
+Each element of these ArrayLists is a string representing a sentence.
+
+<LI> Users can enter text (one string or many strings) in a search box
+to describe their problem. Only keywords, or key phrases, are entered.
+For this assignment, accept keywords from an input file named,
+userInputs.txt. Each search should be in a different line.
+
+<LI> dSeaGate does not want a sophisticated search algorithm, for now.
+So, it wants the following to be done for all searches:
+
+<UL>
+
+   <LI> <I>Exact match</I>: Find and display on stdout all technical
+   sentences that have an exact match for the entered keywords. So, if
+   the user enters "problem detecting", a technical sentence that
+   matches could be the following: "If Windows 7 has a problem
+   detecting the drive, it could be that the portable drive is not
+   receiving enough power."
+
+   <LI> <I>Naive Stemming match</I>: Find and display on stdout all
+   technical sentences that have a word, whose substring is an exact
+   match for the first entered keyword. So, if the user enters "detect
+   error", the technical sentence that matches could be the following:
+   "If Windows 7 has a problem detecting the drive, it could be that
+   the portable drive is not receiving enough power."
+
+   <LI><I>Semantic match</I>: Find the synonym of the last entered
+   keyword by the user and employ "Exact match." Use an input file
+   synonym.txt to store key-value pairs of synonyms.
+  Read the synonyms from the file, during startup, and
+   store them in an appropriate data structure. So, if the user
+   enters "comptabile CPU", the technical sentence that matches could
+   be the following: "All products from AMD have a compatible
+   processor as far as dSeaGate is concerned." The file synonym.txt
+   should have the the following using a format of your choosing. <P>
+
+   CPU:processor
+ </P>
+
+   <LI> The file userInputs.txt should have 27 entries. 8 entries
+   should work with "Exact match", 8 with "one-word match", and 8 with
+   "semantic match." 3 should not match at all. The 24 matches should
+   spread across the 12 different dSeaGate prdocuts.
+
+    <LI> Technical sentences for each product
+    should be read from a file (or multiple files, as per your design)
+    and stored in the ArrayLists. The names of the files should be
+    stored in an Enum, and picked up from there by the code that
+    populates the ArrayLists with the sentences.
+
+    <LI> Searches should be case sensistive.
+
+</UL>
+
+<LI> Data from the local file will be read by a single thread. So, do
+NOT design for a multi-threaded application.
+
+<BR>
+
+<LI> Use Debug in the following manner: 
+<UL>
+
+<LI> 0: No output should be printed. Only error messages should be
+printed (for example, message from a catch caluse before exiting).
+
+<LI> 1: Only the search results should be printed
+<LI> 2: Design on your own and mention in the README what is printed at this debug granularity 
+<LI> 3: Design on your own and mention in the README what is printed at this debug granularity 
+<LI> 4: Design on your own and mention in the README what is printed at this debug granularity 
+</UL>
+
+</UL>
+
+<H2> Design Requirements </H2>
+
+<UL>
+<LI>  Same as Assignment-1
+<LI>  Revisit the Assignment-1 page, and search for "NEW".
+</UL> 
+
+<H2>  Code Organization </H2>
+
+<UL>
+<LI> Your directory structure should be the following:
+
+<PRE>
+ -firstName_lastName_firstName_lastName
+   ---customerSearch
+     ----- build.xml
+     ----- README.txt
+     ----- src
+          ---customerSearch
+     	   ----------driver
+           ----------util
+           ----------other packages that you need
+
+</PRE>
+
+</UL>
+
+
+<H2>  Code Templates </H2>
+<UL> 
+<LI> None provided for this assignment.
+</UL>
+
+<H2>  Submission </H2>
+
+<UL>
+<LI> Same as Assignment-1. Additionally, only one team member should upload to blackboard.
+
+</UL>
+
+<H2> Late Submissions </H2>
+
+<UL>
+
+<LI> The policy for late submissions is that you will lose 10% of the
+grade for each day that your submission is delayed.
+
+</UL>
+
+</UL>
+
+
+<P>
+<P>
+
+<address>mgovinda at cs dot binghamton dot edu</address>
+Back to <a href="../../index.html"> CS 542: Programming Design Patterns</a>
+<!-- hhmts start -->
+<!-- hhmts end -->
+</body> </html>
+
+
+
+
+
+
+
+
+
