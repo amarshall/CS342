@@ -1,7 +1,14 @@
 package customerService.driver;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
 
 import customerService.search.ProductSearch;
 import customerService.search.SearchStrategy;
@@ -81,7 +88,7 @@ public class Driver {
 
     SearchStrategy exact = new ExactMatchSearch();
     SearchStrategy stemmer = new StemmerMatchSearch();
-    SearchStrategy semantic = new SemanticMatchSearch();
+    SearchStrategy semantic = new SemanticMatchSearch(loadSynonyms("data/synonyms.txt"));
 
     System.out.println("Exact results:");
     for(String s : search.search("KENNY", exact)) System.out.println(s);
@@ -91,5 +98,32 @@ public class Driver {
 
     System.out.println("Semantic results:");
     for(String s : search.search("KENNY", semantic)) System.out.println(s);
+  }
+
+  /* line format: "key val1,val2,val3" */
+  private static Map<String, Set<String>> loadSynonyms(String filename) {
+    Map<String, Set<String>> synonyms = new HashMap<String, Set<String>>();
+
+    Scanner reader = null;
+    try {
+      reader = new Scanner(new File(filename));
+      while(reader.hasNext()) {
+        String line = reader.nextLine();
+        String[] tokens = line.split(" ");
+        String key = tokens[0];
+        Set<String> val = new HashSet<String>();
+        for(String s : tokens[1].split(",")) {
+          val.add(s);
+        }
+        synonyms.put(key, val);
+      }
+    } catch(FileNotFoundException e) {
+      System.err.println("File " + filename + " not found.");
+      System.exit(1);
+    } finally {
+      if(reader != null) reader.close();
+    }
+
+  return synonyms;
   }
 }
