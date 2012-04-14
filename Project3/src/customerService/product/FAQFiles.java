@@ -32,13 +32,17 @@ public enum FAQFiles {
   public List<String> getFAQs() {
     List<String> faqs = new ArrayList<String>();
 
+    Scanner reader = null;
     try {
-      Scanner reader = new Scanner(new File(filename));
+      reader = new Scanner(new File(filename));
       while(reader.hasNext()) {
         faqs.add(reader.nextLine());
       }
     } catch(FileNotFoundException e) {
       System.err.println("File " + filename + " not found.");
+      System.exit(1);
+    } finally {
+      if(reader != null) reader.close();
     }
 
     return faqs;
