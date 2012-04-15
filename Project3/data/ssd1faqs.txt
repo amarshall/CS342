@@ -1,0 +1,2 @@
+SSDProduct1 is very reliable, running 100000 hours before failure
+If the OS is having issues using SSDProduct1, try updating the firmware

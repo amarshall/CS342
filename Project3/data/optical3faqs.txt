@@ -1,0 +1,2 @@
+All OpticalDriveProducts have the ability to read and write to dual layer DVDs
+OpticalDriveProduct3 is designed for laptop computers

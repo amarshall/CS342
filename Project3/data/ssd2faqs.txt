@@ -1,0 +1,2 @@
+SSDProducts will have a much faster boot up time than our HDDProducts
+Sending an RMA for SSDProduct2 will take more time, since inventory is low

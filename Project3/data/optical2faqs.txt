@@ -1,0 +1,2 @@
+If the OpticalDriveProduct2 is having problems reading a disk, make sure the disk is not upside down
+The OpticalDriveProduct2 is the only OpticalDriveProduct with bluray disk capabilities
