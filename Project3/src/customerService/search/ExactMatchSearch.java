@@ -8,7 +8,7 @@ public class ExactMatchSearch implements SearchStrategy {
   public Set<String> search(String query, List<String> items) {
     Set<String> results = new TreeSet<String>();
     for(String str : items) {
-      if(str.matches("(.*)(\\A|\\s)(" + query + ")(\\Z|\\s)(.*)")) {
+      if(str.matches("(.*)(\\A|[^\\w])(" + query + ")(\\Z|[^\\w])(.*)")) {
         results.add(str);
       }
     }
