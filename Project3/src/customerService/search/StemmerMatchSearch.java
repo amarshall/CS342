@@ -8,7 +8,7 @@ public class StemmerMatchSearch implements SearchStrategy {
   public Set<String> search(String query, List<String> items) {
     Set<String> results = new TreeSet<String>();
     for(String str : items) {
-      if(str.split(" ")[0].indexOf(query) >= 0) {
+      if(str.indexOf(query.split(" ")[0]) >= 0) {
         results.add(str);
       }
     }
