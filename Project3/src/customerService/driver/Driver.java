@@ -82,22 +82,47 @@ public class Driver {
     for(OpticalDriveProduct p : opticaldrives) p.accept(visitor);
     for(BookProduct p : books) p.accept(visitor);
 
-    List<String> faqs = visitor.getProductData();
-
-    ProductSearch search = new ProductSearch(faqs);
+    ProductSearch search = new ProductSearch(visitor.getProductData());
 
     SearchStrategy exact = new ExactMatchSearch();
     SearchStrategy stemmer = new StemmerMatchSearch();
     SearchStrategy semantic = new SemanticMatchSearch(loadSynonyms("data/synonyms.txt"));
 
-    System.out.println("Exact results:");
-    for(String s : search.search("KENNY", exact)) System.out.println(s);
+    for(String query : loadUserInputs("data/userInputs.txt")) {
+      System.out.println("Search results for '" + query + "':");
+      System.out.println("  Exact results:");
+      for(String s : search.search(query, exact)) System.out.println("    " + s);
 
-    System.out.println("Stemmer results:");
-    for(String s : search.search("KENNY", stemmer)) System.out.println(s);
+      System.out.println("  Stemmer results:");
+      for(String s : search.search(query, stemmer)) System.out.println("    " + s);
 
-    System.out.println("Semantic results:");
-    for(String s : search.search("KENNY", semantic)) System.out.println(s);
+      System.out.println("  Semantic results:");
+      for(String s : search.search(query, semantic)) System.out.println("    " + s);
+
+      System.out.println();
+    }
+  }
+
+  private static List<String> loadUserInputs(String filename) {
+    List<String> inputs = new ArrayList<String>();
+
+    Scanner reader = null;
+    try {
+      reader = new Scanner(new File(filename));
+      while(reader.hasNext()) {
+        String line = reader.nextLine();
+        if(line.length() > 0) {
+          inputs.add(line);
+        }
+      }
+    } catch(FileNotFoundException e) {
+      System.err.println("File " + filename + " not found.");
+      System.exit(1);
+    } finally {
+      if(reader != null) reader.close();
+    }
+
+    return inputs;
   }
 
   /* line format: "key val1,val2,val3" */
@@ -124,6 +149,6 @@ public class Driver {
       if(reader != null) reader.close();
     }
 
-  return synonyms;
+    return synonyms;
   }
 }
