@@ -36,9 +36,11 @@ import customerService.product.BookProduct;
 import customerService.product.BookProduct1;
 import customerService.product.BookProduct2;
 import customerService.product.BookProduct3;
+import customerService.util.Debug;
 
 public class Driver {
   public static void main(String[] args) {
+    Debug.DEBUG_VALUE = 1;
     List<HDDProduct> hdds = new ArrayList<HDDProduct>();
     List<SSDProduct> ssds = new ArrayList<SSDProduct>();
     List<OpticalDriveProduct> opticaldrives = new ArrayList<OpticalDriveProduct>();
@@ -89,17 +91,17 @@ public class Driver {
     SearchStrategy semantic = new SemanticMatchSearch(loadSynonyms("data/synonyms.txt"));
 
     for(String query : loadUserInputs("data/userInputs.txt")) {
-      System.out.println("Search results for '" + query + "':");
-      System.out.println("  Exact results:");
-      for(String s : search.search(query, exact)) System.out.println("    " + s);
+      Debug.log(1,"Search results for '" + query + "':");
+      Debug.log(1,"  Exact results:");
+      for(String s : search.search(query, exact)) Debug.log(1,"    " + s);
 
-      System.out.println("  Stemmer results:");
-      for(String s : search.search(query, stemmer)) System.out.println("    " + s);
+      Debug.log(1,"  Stemmer results:");
+      for(String s : search.search(query, stemmer)) Debug.log(1,"    " + s);
 
-      System.out.println("  Semantic results:");
-      for(String s : search.search(query, semantic)) System.out.println("    " + s);
+      Debug.log(1,"  Semantic results:");
+      for(String s : search.search(query, semantic)) Debug.log(1,"    " + s);
 
-      System.out.println();
+      Debug.log(1, "");
     }
   }
 
