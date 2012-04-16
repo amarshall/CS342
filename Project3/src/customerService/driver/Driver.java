@@ -91,15 +91,15 @@ public class Driver {
     SearchStrategy semantic = new SemanticMatchSearch(loadSynonyms("data/synonyms.txt"));
 
     for(String query : loadUserInputs("data/userInputs.txt")) {
-      Debug.log(1,"Search results for '" + query + "':");
-      Debug.log(1,"  Exact results:");
-      for(String s : search.search(query, exact)) Debug.log(1,"    " + s);
+      Debug.log(1, "Search results for '" + query + "':");
+      Debug.log(1, "  Exact results:");
+      for(String s : search.search(query, exact)) Debug.log(1, "    " + s);
 
-      Debug.log(1,"  Stemmer results:");
-      for(String s : search.search(query, stemmer)) Debug.log(1,"    " + s);
+      Debug.log(1, "  Stemmer results:");
+      for(String s : search.search(query, stemmer)) Debug.log(1, "    " + s);
 
-      Debug.log(1,"  Semantic results:");
-      for(String s : search.search(query, semantic)) Debug.log(1,"    " + s);
+      Debug.log(1, "  Semantic results:");
+      for(String s : search.search(query, semantic)) Debug.log(1, "    " + s);
 
       Debug.log(1, "");
     }
