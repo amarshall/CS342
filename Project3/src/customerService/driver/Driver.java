@@ -40,7 +40,7 @@ import customerService.util.Debug;
 
 public class Driver {
   public static void main(String[] args) {
-    Debug.DEBUG_VALUE = 1;
+    Debug.setDebug(4);
     List<HDDProduct> hdds = new ArrayList<HDDProduct>();
     List<SSDProduct> ssds = new ArrayList<SSDProduct>();
     List<OpticalDriveProduct> opticaldrives = new ArrayList<OpticalDriveProduct>();
