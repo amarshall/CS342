@@ -1,0 +1,2 @@
+If the bios cannot recognize any of the OpticalDriveProducts, try replacing the SATA cable
+The OpticalDriveProduct1 has the quickest read and write speed
