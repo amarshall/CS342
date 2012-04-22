@@ -1,11 +1,11 @@
-<project name="customerService" default="compile" basedir=".">
+<project name="taskManager" default="compile" basedir=".">
   <property name="build.compiler" value="modern" />
   <property name="src"            value="src" />
   <property name="doc"            value="doc" />
   <property name="BUILD"          value="build" />
   <property name="classes"        value="${BUILD}/classes" />
 
-  <target name="compile" depends="customerService" />
+  <target name="compile" depends="taskManager" />
 
   <target name="clean">
     <delete dir="${BUILD}" />
@@ -16,9 +16,9 @@
     <mkdir dir="${classes}" />
   </target>
 
-  <target name="customerService" depends="prepare">
+  <target name="taskManager" depends="prepare">
     <javac srcdir="${src}"
-           includes="customerService/**"
+           includes="taskManager/**"
            excludes="**/package.html"
            destdir="${classes}"
            classpath="${classes}"
@@ -35,9 +35,9 @@
 
   <target name="jar">
     <mkdir dir="${BUILD}/jar" />
-    <jar destfile="${BUILD}/jar/customerService.jar" basedir="${BUILD}/classes">
+    <jar destfile="${BUILD}/jar/taskManager.jar" basedir="${BUILD}/classes">
       <manifest>
-        <attribute name="Main-Class" value="customerService.driver.Driver" />
+        <attribute name="Main-Class" value="taskManager.driver.Driver" />
       </manifest>
     </jar>
   </target>
@@ -50,7 +50,7 @@
   </target>
 
   <target name="run" depends="jar">
-    <java jar="${BUILD}/jar/customerService.jar" fork="true">
+    <java jar="${BUILD}/jar/taskManager.jar" fork="true">
       <arg value="123456791" />
       <arg value="3" />
       <arg value="6" />
