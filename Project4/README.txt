@@ -7,6 +7,8 @@ PURPOSE: Apply the design principles and patterns you have learned so far to dev
 PERCENT COMPLETE:
 PARTS THAT ARE NOT COMPLETE:
 BUGS:
+INPUT FORMAT:
+process:"name","owner",cpu,mem,"description"
 SAMPLE OUTPUT:
 TO COMPILE: ant compile
 TO RUN: ant run
