@@ -56,7 +56,7 @@ public class TaskManager extends Observable {
     if(tab.equals("process")) {
       Process p = null;
       try {
-        p = new Process(fields[0], fields[1], Double.parseDouble(fields[2]), Integer.parseInt(fields[3]), fields[4]);
+        p = new Process(fields[0], fields[1], Double.parseDouble(fields[2]), Double.parseDouble(fields[3]), fields[4]);
       } catch(NumberFormatException e) {
         System.err.println("Bad input.");
         System.exit(1);
