@@ -8,7 +8,9 @@ PERCENT COMPLETE:
 PARTS THAT ARE NOT COMPLETE:
 BUGS:
 INPUT FORMAT:
-process:"name","owner",cpu,mem,"description"
+process:name,owner,cpu,mem,description
+system:mem,cpu,totalMem,totalCached
+user:name,status
 SAMPLE OUTPUT:
 TO COMPILE: ant compile
 TO RUN: ant run

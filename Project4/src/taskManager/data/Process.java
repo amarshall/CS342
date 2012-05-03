@@ -9,7 +9,7 @@ public class Process extends Observable {
   private double memoryUsage;
   private String description;
 
-  public Process(String name, String owner, double cpuUsage, int memoryUsage, String description) {
+  public Process(String name, String owner, double cpuUsage, double memoryUsage, String description) {
     this.name = name;
     this.owner = owner;
     this.cpuUsage = cpuUsage;
@@ -30,7 +30,7 @@ public class Process extends Observable {
   public void setDescription(String description) { this.description = description; setChanged(); }
 
   public String toString() {
-    return "Process '"      + getName()        + "' | " +
+    return "Process '"      + getName()        + "' | " + 
            "Owner: '"       + getOwner()       + "' | " +
            "CpuUsage: '"    + getCpuUsage()    + "' | " +
            "MemoryUsage: '" + getMemoryUsage() + "' | " +
