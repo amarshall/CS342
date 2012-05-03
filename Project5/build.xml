@@ -1,0 +1,59 @@
+<project name="genericEventProcessor" default="compile" basedir=".">
+  <property name="build.compiler" value="modern" />
+  <property name="src"            value="src" />
+  <property name="doc"            value="doc" />
+  <property name="BUILD"          value="build" />
+  <property name="classes"        value="${BUILD}/classes" />
+
+  <target name="compile" depends="genericEventProcessor" />
+
+  <target name="clean">
+    <delete dir="${BUILD}" />
+  </target>
+
+  <target name="prepare">
+    <mkdir dir="${BUILD}" />
+    <mkdir dir="${classes}" />
+  </target>
+
+  <target name="genericEventProcessor" depends="prepare">
+    <javac srcdir="${src}"
+           includes="genericEventProcessor/**"
+           excludes="**/package.html"
+           destdir="${classes}"
+           classpath="${classes}"
+           debug="on"
+           optimize="on"
+           deprecation="off"
+           includeantruntime="false"
+    />
+  </target>
+
+  <target name="doc">
+    <javadoc sourcepath="${src}" destdir="${doc}" />
+  </target>
+
+  <target name="jar">
+    <mkdir dir="${BUILD}/jar" />
+    <jar destfile="${BUILD}/jar/genericEventProcessor.jar" basedir="${BUILD}/classes">
+      <manifest>
+        <attribute name="Main-Class" value="genericEventProcessor.driver.Driver" />
+      </manifest>
+    </jar>
+  </target>
+
+  <target name="tar" depends="clean">
+    <tar compression="gzip" destfile="Marshall_John_assign5.tar.gz">
+      <tarfileset dir=".">
+      </tarfileset>
+    </tar>
+  </target>
+
+  <target name="run" depends="jar">
+    <java jar="${BUILD}/jar/genericEventProcessor.jar" fork="true">
+      <arg value="123456791" />
+      <arg value="3" />
+      <arg value="6" />
+    </java>
+  </target>
+</project>

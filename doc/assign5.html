@@ -1,0 +1,349 @@
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title> Program Design Patterns: Assignment 5</title>
+</head>
+
+<body>
+<h1> Assignment 5  </h1>
+
+
+<h2> Due date </h2>
+<UL> 
+<LI> TBA
+</UL>
+
+<BR> 
+
+Submit your code as per the provided instructions. A signup sheet will
+be provided to you during class to setup an appointment with the TA to
+provide a demo of your project. 
+
+</UL>
+
+<h3> Updates </h3>
+
+<UL>
+</UL>
+
+<h3> Assignment Goal </h3>
+
+Apply the design principles you have learned so far to develop and
+test code for the given problem. Apply the proxy and strategy
+patterns, and any other applicable pattern(s).
+
+
+
+<h3> Team Work </h3>
+
+You have to work alone on this project. You CANNOT collaborate or
+discuss the design, implementation, or debugging ideas with any other
+students. However, discussion on design is encouraged via the
+listserv.
+
+
+<h3> Programming Language </h3>
+You are required to program this project in Java.
+
+<h3> Compilation Method </H3> 
+
+<UL>
+<LI> You are required to use </I> ANT </I> for the following:
+  <UL>
+   <LI> Compiling the code 
+   <LI> running the code
+   <LI> Generating a tarball for submission
+   <LI> Generating javadocs
+</UL>
+
+<LI> Your code should compile and run on <I> bingsuns </I> or the <I>
+debian-pods </I> in the Computer Science lab in the Engineering
+Building.
+
+</UL> 
+
+
+<h3> Policy on sharing of code </h3>
+
+<LI> EVERY line of code that you submit in this assignment should be
+written by your team or be part of the code template provided for this
+assignment. Do NOT show your code to any other group. Our
+code-comparison software can very easily detect similarities.
+
+<LI> Post to the listserv if you have any questions about the
+requirements. Do NOT post your code to the listserv asking for help
+with debugging. However, it is okay to post design/concept questions
+on programming in Java/C/C++.
+
+</UL>
+
+<H2>  Project Description  </H2>
+
+<H3> Generic Event Listener </H3>
+
+The purpose of this assignment is to create a generic event
+serializer. The code should allow the conversion of objects into
+different <I>wire-formats</I>. The code should be designed using
+dynamic proxies and reflection so that addition of new objects or
+serialization formats causes minimal changes (reduces the ripple
+effect).
+
+<UL> 
+
+<LI> Creating the Dynamic Proxy
+
+<UL>
+<LI> The Client/Driver code should call the <I> createProxy </I>
+method in the ProxyCreator utility class to create a dynamic proxy reference. The
+code inside the createProxy method is shown below. 
+
+
+<PRE>
+ RemoteEvent remoteEvent =
+            (RemoteEvent)
+            Proxy.newProxyInstance(
+                                   getClass().getClassLoader(),
+                                   interfaceArray,
+                                   handler
+                                   );
+
+</PRE>
+
+<LI> Pass an array of interfaces to the createProxy method with the
+following interfaces (RemoteLogger, RemoteViz, RemoteExecution).
+
+<PRE>
+
+public interface RemoteLogger extends RemoteEvent {
+      void writeLogger(LogStore logStoreIn, int sequenceNo, string serializationFormat);
+      SerializableObject readLogger(string wireFormat, string serializationFormat);
+}
+
+public interface RemoteViz extends RemoteEvent {
+      void writeViz(VizDetails vizDetailsIn, int sequenceNo, string serializationFormat);
+      SerializableObject readViz(string wireFormat, string serializationFormat);
+}
+
+public interface RemoteExecution extends RemoteEvent {
+      void writeExecution(ExecDetails execDetailsIn, int sequenceNo, string serializationFormat);
+      SerializableObject readExecution(string wireFormat, string serializationFormat);
+}
+
+</PRE>
+
+<LI> Pass an invocation handler (an instance of EventSerializer) to
+the createProxy() utility method.
+
+</UL>
+
+<LI> RemoteEvent.java should be a <I> tag  </I> interface.
+
+<LI> Each of the 3 RemoteEvent interfaces should be exactly as specified above.
+
+</UL>
+
+<LI> Define the objects LogStore, VizDetails, and ExecDetails with at
+least two primitive data members each. Design them like JavaBeans
+(with getX and setX methods for all data members). Each of these three
+objects should extend SerializableObject.
+
+<LI> SerializableObject is an empty class, so it serves the role of a
+marker. 
+
+<LI> If you add new method names to the interfaces note that the
+methods names in the interfaces of RemoteEvent should be unique (don't
+use the same method name in two different interfaces, as it will cause
+problems with dynamic proxy usage).
+
+<LI> The client/driver code should invoke methods on the dynamic
+proxy, as if it is invoking methods on an object that implements the 3
+interfaces mentioned below. Remember to cast the dynamic proxy to the
+correct interface before invoking the method.
+
+<LI> Each invocation will transfer control to the <I> invoke </I>
+method of the invocation handler.
+
+<LI> In the invocation handler do the following:
+
+<UL>
+
+<LI> Write data to a file based on the following requirements:
+
+<LI> If the serialization format is "xml", then add XML tags to all
+the data written to the file. You can make up tag names.
+
+<LI> If the serialization format is "plaintext" just write the
+following data to the file, with newlines appropriately placed so that
+the output is readable.
+
+<UL>
+
+<LI> the type (fully qualified name) for each of the arguments
+the client invocation received by the invoke() method (in the args[]
+array). [use java reflection API.] 
+
+<LI> the method name that was invoked
+
+<LI> the declaring class name for the method invocation (use
+getDeclaringClass() on the Method argument).
+
+<LI> For the argument received that is a user defined complex type,
+write all the data member types and values in that object. [use Java
+reflection API].
+
+</UL>
+
+</UL>
+
+<LI> Event Deserialization
+
+<UL>
+<LI> In the driver code, create a proxy for deserialization.
+
+<LI> Read the text file generated in the serialization step into a
+string. Invoke a method on the deserialization proxy and pass the
+string. Use Java reflection to create a new instance of the object
+using the string. <font color="red">So, you need to deserialize just
+the complex type, and not the method arguments</font>. Note that the
+state of the serialized object should match the state of the
+deserialized object.
+
+</UL>
+
+<LI> Flow of Control
+
+<UL>
+<LI> Create Dynamic Proxy for Serialization
+<LI> Create Dynamic Proxy for De-Serialization
+<LI> Create one instance each for LogStore, VizDetails, and ExecDetails.
+
+<LI> Use the serialization proxy to invoke a method of each of the 3
+interfaces (RemoteLogger, RemoteViz, RemoteExecution). Pass the
+relevant arguments.
+
+<LI> Whenever a method is invoked on the proxy, the corresponding
+invocation handler code is called. Serialize the object to a file.
+
+<LI> Use the deserialization proxy to read the wire-format from the
+file by invoking the corresponding readX methods, create an instance of the relevant object, invoke the setX
+methods to set the state, and compare the newly created object with
+the serialized instance to ensure they are <I> equal </I>.
+
+</UL>
+
+</UL>
+
+<H2> Some General Design Considerations </H2>
+     
+<UL>
+<LI> Same as before
+</UL> 
+
+<H2>  Code Organization </H2>
+
+<UL>
+<LI> Your directory structure should be the following:
+<PRE>
+ -firstName_lastName
+ ---genericEventProcessor
+ ----build.xml
+ ----README.txt
+ ----src
+ ------client
+ ---------Client.java
+ ------server
+ ---------RemoteEvent.java  [Base Event interface]
+ ---------logger
+ ------------RemoteLogger.java 
+ ---------viz
+ ------------RemoteViz.java 
+ ---------execution
+ ------------RemoteExecution.java
+ ------util
+ ---------LogStore.java    [Object used in RemoteLogger interface]
+ ---------VizDetails.java  [Object used in RemoteViz interface]
+ ---------ExecDetails.java [Object used in RemoteExecution interface]
+ ---------ProxyCreator.java 
+ ---------SerializableObject [empty class]
+ ------eventSerialization
+ ---------EventSerializer.java  (implements InvocationHandler)
+ ------eventDeSerialization
+ ---------EventDeSerializer.java  (implements InvocationHandler)
+
+ ------Any other Class/file you need
+
+</PRE>
+</UL>
+
+<H2>  Code Templates </H2>
+<UL> 
+<LI> None provided for this assignment.
+</UL>
+
+
+<H2> Example Serialization Formats </H2>
+<UL> 
+
+<LI> Here is an example of the <a href="./logStore1.txt">XML
+format</a> when the writeLogger(...) method is called. Assume that the
+LogStore class has two data members: int storeId, and string
+dbConnection. The values of these data members at the time of
+serialization are 17 and "sqlserver.binghamton.edu:3456".
+
+<LI> Caution: This example may not be 100% compliant with the
+standard (but is close ...)
+
+<LI> You can hardcode the generation of the first line "&lt;?xml
+version="1.0" encoding="UTF-8"?>" each time the serialized format
+needs to be generated. 
+
+<LI> Again, hardcode the namespace information that appears after the
+tag name "EventSerialization". Namespaces in XML is an interesting
+topic of discussion (but for some other course).
+
+<LI> Note how the serialization of the complex type "LogStore" and the
+other arguments sequenceNumer and serializationFormat seem to follow a
+"template". Design your code accordingly.
+
+<LI> Instead of using an XML parser, during de-serialization, you can
+use the rich string API in Java to search for specific values. For
+example, search for the value of the attribute xsi:type of a
+complexType to obtain "genericEventProcessor.util.LogStore". Next,
+create an instance of an object with this type name.
+
+<LI> The <a href="http://java.sun.com/developer/technicalArticles/ALT/Reflection/">following web page </a> has useful examples on how
+to use Java reflection.
+
+</UL>
+
+
+<H2>  Submission </H2>
+
+<UL>
+
+<LI> Same as Assignment-1. 
+
+</UL>
+
+<H2> Late Submissions </H2>
+
+<UL>
+
+<LI> The policy for late submissions is that you will lose 10% of the
+grade for each day that your submission is delayed.
+
+</UL>
+
+</UL>
+
+
+<P>
+<P>
+
+
+<address>mgovinda at cs dot binghamton dot edu</address>
+Back to <a href="../../index.html"> CS 342/542: Programming Design Patterns</a>
+<!-- hhmts start -->
+<!-- hhmts end -->
+</body> </html>
+
