@@ -1,0 +1,246 @@
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title> Program Design Patterns: Assignment 4</title>
+</head>
+
+<body>
+<h1> Assignment 4 </h1>
+
+
+<h2> Due date </h2>
+<UL> 
+<LI> Due by demo time on Friday, April 27th.
+
+</UL>
+
+<BR> 
+
+Submit your code as per the provided instructions. A signup sheet will
+be provided to you during class to setup an appointment with the TA to
+provide a demo of your project. 
+
+</UL>
+
+<h3> Updates </h3>
+
+<UL>
+</UL>
+
+<h3> Assignment Goal </h3>
+
+Apply the design principles and patterns you have learned so far to
+develop and test code for the given problem.
+
+
+<h3> Team Work </h3>
+
+<UL>
+
+<LI> You are required to work in teams of two students on this
+project. Continue with the project partner from the previous
+assignment. You CANNOT collaborate or discuss the design,
+implementation, or debugging ideas with any other team.
+
+
+<LI> Both team members should be familiar with all aspects of the
+code. During the demo, the TA will randomly pick one of the team
+members to demo and answer questions. Failure to show familiarity with
+any part of the code will result in deduction of 50% of the assignment
+grade for both team members.
+
+</UL>
+
+
+<h3> Programming Language </h3>
+You are required to program this project in Java.
+
+<h3> Compilation Method </H3> 
+
+<UL>
+<LI> You are required to use </I> ANT </I> for the following:
+  <UL>
+   <LI> Compiling the code 
+   <LI> running the code
+   <LI> Generating a tarball for submission
+   <LI> Generating javadocs
+</UL>
+
+<LI> Your code should compile and run on <I> bingsuns </I> or the <I>
+debian-pods </I> in the Computer Science lab in the Engineering
+Building.
+
+</UL> 
+
+
+<h3> Policy on sharing of code </h3>
+
+<LI> EVERY line of code that you submit in this assignment should be
+written by your team or be part of the code template provided for this
+assignment. Do NOT show your code to any other group. Our
+code-comparison software can very easily detect similarities.
+
+<LI> Post to the listserv if you have any questions about the
+requirements. Do NOT post your code to the listserv asking for help
+with debugging. However, it is okay to post design/concept questions
+on programming in Java/C/C++.
+
+</UL>
+
+<H2> Project Description  </H2>
+
+<H3> dWindows TaskManager </H3>
+
+Develop a text based dashboard for a TaskManager. Check out the
+TaskManager on any Windows based OS for an example. There are three
+tabs on the dashboard for this assignment.
+
+<UL>
+<LI> <I>Processes</I>. It has the following information: ProcessName: value, UserName: value, CPU: value, Memory: value, Description: value
+<LI> <I>Performance</I>: It has the following information; Current Memory usage: value, current CPU usage: value. Total Physical memory: value, Total Cached: value. 
+<LI> <I>Users</I>: It has the following information: userName: value, status: value. <font color="blue">The options for status are: active, inactive, disconnected</font>
+</UL> 
+
+<LI> For the information required to display in the dashboard, read
+synthetic data from a local file, one line at a time, process it, and
+update the display accordingly.
+
+<LI> Explain the format of the data in your README.txt file. You can
+choose any text-based format that you find easy to parse and process.
+The synthetic data should include data in different lines. Processing
+of each line should affect at least one tab of the dashboard.  
+
+<LI> The format in each line may be different. For example, it is ok
+to have the first word of a line indicate which tab the data is for.
+
+<LI> Note that the tab for Total Memory and Total CPU should be
+updated whenever it is read from the input file.
+
+<LI> The Total Physical memory and Total cached memory, displayed in
+the <I>performance tab </I> are constant. Decide, and mention in the
+README.txt, how it is stored in the input file.
+
+<LI> Data from the local file should be read by a
+single thread. So, do NOT design for a multi-threaded
+application.
+
+<LI> The dashboard should show up-to-date information for all the
+information that a user wants to keep track of. It should write to
+stdout as it gets new information after reading a line of input.
+However, the update of one tab (or information in a tab) need not
+automatically update other tabs.
+
+<LI> The dashboard should also store all the information it receives.
+So. separate out the display module from the storage module.
+
+<P>
+
+<LI> <font color="blue">How would the processes be impacted by a change
+from "Active" to "Disconnected"?. Answer: No change.</font>
+
+<LI> <font color="blue">If a user logs off, is it
+acceptable to terminate all of their > processes in addition to
+removing them from the list of users? Answer: It is acceptable, but
+not required.</font>
+
+<LI> <font color="blue">Should the information to be
+displayed stored? Answer: separate data structure(s) should be
+designed to store the information. The "display" should just display.
+So, if I add a GUI requirement, just the display module will change and
+nothing else.</font>
+
+<LI> <font color="blue"> Are we to display all the
+ Processes information, Performance information, and Users information
+ every time something is read from the file, and regardless as to
+ whether they change as a result? For example, a user logs in, but
+ this only affects the Users tab. Should we still display all three?
+ Answer: No, just display the new information on stdout corresponding
+ to the entry in the input file. Do not display everything. </font>
+
+<P>
+
+<LI> Use Debug in the following manner: 
+<UL>
+
+<LI> 0: No output should be printed. Only error messages should be
+printed (for example, message from a catch caluse before exiting).
+
+<LI> 1: Only ouput from the dashboard should be printed
+<LI> 2: Design on your own and mention in the README what is printed at this debug granularity 
+<LI> 3: Design on your own and mention in the README what is printed at this debug granularity 
+<LI> 4: Design on your own and mention in the README what is printed at this debug granularity 
+</UL>
+
+</UL>
+
+<H2> Design Requirements </H2>
+
+<UL>
+<LI>  Same as Assignment-1
+<LI>  Revisit the Assignment-1 page, and search for "NEW".
+</UL> 
+
+<H2>  Code Organization </H2>
+
+<UL>
+<LI> Your directory structure should be the following:
+
+<PRE>
+ -firstName_lastName_firstName_lastName
+   ---taskManager
+     ----- build.xml
+     ----- README.txt
+     ----- src
+          ---taskManager
+     	   ----------driver
+           ----------util
+           ----------other packages that you need
+
+</PRE>
+
+</UL>
+
+
+<H2>  Code Templates </H2>
+<UL> 
+<LI> None provided for this assignment.
+</UL>
+
+<H2>  Submission </H2>
+
+<UL>
+
+<LI> Same as Assignment-1. Additionally, only one team member should
+upload to blackboard.
+
+</UL>
+
+<H2> Late Submissions </H2>
+
+<UL>
+
+<LI> The policy for late submissions is that you will lose 10% of the
+grade for each day that your submission is delayed.
+
+</UL>
+
+</UL>
+
+
+<P>
+<P>
+
+<address>mgovinda at cs dot binghamton dot edu</address>
+Back to <a href="../../index.html"> CS 342: Programming Design Patterns</a>
+<!-- hhmts start -->
+<!-- hhmts end -->
+</body> </html>
+
+
+
+
+
+
+
+
+
