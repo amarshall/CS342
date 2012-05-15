@@ -26,7 +26,9 @@
            optimize="on"
            deprecation="off"
            includeantruntime="false"
-    />
+    >
+      <compilerarg value="-Xlint:unchecked" />
+    </javac>
   </target>
 
   <target name="doc">
