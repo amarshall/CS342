@@ -34,10 +34,9 @@ public class EventSerializer implements InvocationHandler {
 
     serializer.addObject(object);
 
-    // FIXME add these to the serialization strategy
-    // for(Object o : args) { output.add("arg : " + o.getClass().getName()); }
-    // output.add("method : " + methodName);
-    // output.add("class : " + klass.getName());
+    serializer.addCallingArgs(args);
+    serializer.addCallingMethod(method);
+    serializer.addCallingClass(klass);
 
     for(Field field : object.getClass().getDeclaredFields()) {
       try {

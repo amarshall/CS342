@@ -1,6 +1,8 @@
 package genericEventProcessor.eventSerialization;
 
+import java.lang.Class;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,10 @@ public class XMLSerializationStrategy implements SerializationStrategy {
   public void endObject() {
     output.add("</object>");
   }
+
+  public void addCallingMethod(Method method) {}
+  public void addCallingArgs(Object[] args) {}
+  public void addCallingClass(Class klass) {}
 
   public List<String> getOutput() {
     return output;
