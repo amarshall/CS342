@@ -20,7 +20,7 @@ public class Client {
 
     // invoke a method on the proxy
     LogStore store = new LogStore();
-    ((RemoteLogger) serializedEvent).writeLogger(store, 117, "xml");
+    ((RemoteLogger) serializedEvent).writeLogger(store, 117, "plaintext");
 
     // rest of the code for invoking methods on other interfaces using the
     // proxy reference
