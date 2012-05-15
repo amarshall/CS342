@@ -37,7 +37,7 @@
     <mkdir dir="${BUILD}/jar" />
     <jar destfile="${BUILD}/jar/genericEventProcessor.jar" basedir="${BUILD}/classes">
       <manifest>
-        <attribute name="Main-Class" value="genericEventProcessor.driver.Driver" />
+        <attribute name="Main-Class" value="genericEventProcessor.client.Client" />
       </manifest>
     </jar>
   </target>

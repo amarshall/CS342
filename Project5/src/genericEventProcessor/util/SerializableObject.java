@@ -1,3 +1,3 @@
 package genericEventProcessor.util;
 
-public interface SerializableObject {}
+public class SerializableObject {}
