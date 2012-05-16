@@ -49,7 +49,7 @@ public class Client {
       RemoteViz serializedEvent = (RemoteViz) pc.createProxy(classes, new EventSerializer());
       before = new VizDetails();
       before.setFoo(42);
-      before.setBar(3.14);
+      before.setBaz(3.14);
       serializedEvent.writeViz(before, 118, new PlainTextSerializationStrategy());
 
       RemoteViz deserializedEvent = (RemoteViz) pc.createProxy(classes, new EventDeserializer());
