@@ -10,27 +10,22 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import genericEventProcessor.eventDeserialization.DeserializationStrategy;
-
 public class EventDeserializer implements InvocationHandler {
   public Object invoke(Object o, Method m, Object[] args) {
     String input = (String)args[0];
     DeserializationStrategy deserializer = (DeserializationStrategy)args[1];
-    deserializer.parse(input);
+    DeserializedObject rawObject = deserializer.parse(input);
     Object object = null;
 
     try {
-      Class<?> klass = Class.forName(deserializer.objectClass());
+      Class<?> klass = Class.forName(rawObject.getType());
       object = klass.newInstance();
-      for(String fieldName : deserializer.fieldNames()) {
-        String valueTypeRaw = deserializer.fieldType(fieldName);
-        String valueRaw = deserializer.fieldValue(fieldName);
-
-        Class<?> valueClass = Class.forName(valueTypeRaw);
+      for(Field field : rawObject.getFields()) {
+        Class<?> valueClass = Class.forName(field.getType());
         Constructor valueConstructor = valueClass.getConstructor(String.class);
-        Object value = valueConstructor.newInstance(valueRaw);
+        Object value = valueConstructor.newInstance(field.getValue());
 
-        Method writerMethod = getWriterMethod(klass, fieldName, valueClass);
+        Method writerMethod = getWriterMethod(klass, field.getName(), valueClass);
         writerMethod.invoke(object, value);
       }
     } catch(ClassNotFoundException e) {
