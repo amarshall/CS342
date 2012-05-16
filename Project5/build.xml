@@ -53,9 +53,7 @@
 
   <target name="run" depends="jar">
     <java jar="${BUILD}/jar/genericEventProcessor.jar" fork="true">
-      <arg value="123456791" />
-      <arg value="3" />
-      <arg value="6" />
+      <assertions><enable /></assertions>
     </java>
   </target>
 </project>

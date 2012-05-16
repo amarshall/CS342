@@ -16,38 +16,64 @@ import genericEventProcessor.server.execution.RemoteExecution;
 import genericEventProcessor.server.RemoteEvent;
 import genericEventProcessor.server.logger.RemoteLogger;
 import genericEventProcessor.server.viz.RemoteViz;
+import genericEventProcessor.util.ExecDetails;
 import genericEventProcessor.util.LogStore;
+import genericEventProcessor.util.VizDetails;
 import genericEventProcessor.util.ProxyCreator;
 
 public class Client {
   public static void main(String[] args) {
     ProxyCreator pc = new ProxyCreator();
+    Class[] classes = new Class[] { RemoteExecution.class, RemoteLogger.class, RemoteViz.class };
 
-    // create a proxy
-    RemoteEvent serializedEvent = pc.createProxy(new Class[] {
-        RemoteExecution.class, RemoteLogger.class, RemoteViz.class
-    }, new EventSerializer());
+    {
+      ExecDetails before;
+      ExecDetails after;
 
-    // invoke a method on the proxy
-    LogStore store = new LogStore();
-    store.setFoo(314);
-    store.setBar(42);
-    ((RemoteLogger) serializedEvent).writeLogger(store, 117, new PlainTextSerializationStrategy());
+      RemoteExecution serializedEvent = (RemoteExecution) pc.createProxy(classes, new EventSerializer());
+      before = new ExecDetails();
+      before.setFoo(314);
+      before.setBar(42);
+      serializedEvent.writeExecution(before, 117, new PlainTextSerializationStrategy());
 
-    // rest of the code for invoking methods on other interfaces using the
-    // proxy reference
+      RemoteExecution deserializedEvent = (RemoteExecution) pc.createProxy(classes, new EventDeserializer());
+      String data = readFile("117.txt");
+      after = (ExecDetails) deserializedEvent.readExecution(data, new PlainTextDeserializationStrategy());
 
-    // use remote proxy to deserialize object
-    RemoteEvent deserializedEvent = pc.createProxy(new Class[] {
-        RemoteExecution.class, RemoteLogger.class, RemoteViz.class
-    }, new EventDeserializer());
+      assert before.equals(after);
+    }
+    {
+      VizDetails before;
+      VizDetails after;
 
-    String data = readFile("117.txt");
-    LogStore anotherStore = (LogStore) ((RemoteLogger) deserializedEvent).readLogger(data, new PlainTextDeserializationStrategy());
-    System.out.println(anotherStore.getFoo());
-    System.out.println(anotherStore.getBar());
+      RemoteViz serializedEvent = (RemoteViz) pc.createProxy(classes, new EventSerializer());
+      before = new VizDetails();
+      before.setFoo(314);
+      before.setBar(42);
+      serializedEvent.writeViz(before, 118, new PlainTextSerializationStrategy());
 
-    // compare and confirm that anotherStore and store are the same
+      RemoteViz deserializedEvent = (RemoteViz) pc.createProxy(classes, new EventDeserializer());
+      String data = readFile("118.txt");
+      after = (VizDetails) deserializedEvent.readViz(data, new PlainTextDeserializationStrategy());
+
+      assert before.equals(after);
+    }
+    {
+      LogStore before;
+      LogStore after;
+
+      RemoteLogger serializedEvent = (RemoteLogger) pc.createProxy(classes, new EventSerializer());
+      before = new LogStore();
+      before.setFoo(314);
+      before.setBar(42);
+      serializedEvent.writeLogger(before, 119, new PlainTextSerializationStrategy());
+
+      RemoteLogger deserializedEvent = (RemoteLogger) pc.createProxy(classes, new EventDeserializer());
+      String data = readFile("119.txt");
+      after = (LogStore) deserializedEvent.readLogger(data, new PlainTextDeserializationStrategy());
+
+      assert before.equals(after);
+    }
   }
 
   private static String readFile(String filename) {
