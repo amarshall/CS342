@@ -21,7 +21,7 @@ public class PlainTextSerializationStrategy implements SerializationStrategy {
 
   public void addObject(Object object) {
     String name = object.getClass().getName();
-    output.add(name);
+    output.add("object:" + name);
   }
 
   public void endObject() {}

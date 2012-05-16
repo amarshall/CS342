@@ -7,14 +7,16 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class PlainTextDeserializationStrategy implements DeserializationStrategy {
+public class XMLDeserializationStrategy implements DeserializationStrategy {
   private String objectClass;
   private Set<String> fieldNames;
   private Map<String, String> fieldTypes;
   private Map<String, String> fieldValues;
 
-  public PlainTextDeserializationStrategy(String input) {
+  public XMLDeserializationStrategy(String input) {
     objectClass = "";
     fieldNames = new HashSet<String>();
     fieldTypes = new HashMap<String, String>();
@@ -41,24 +43,44 @@ public class PlainTextDeserializationStrategy implements DeserializationStrategy
   private void parse(String input) {
     String[] lines = input.split("\n");
     for(String line : lines) {
-      if(line.startsWith("object:")) {
+      if(line.startsWith("<object")) {
         parseObjectTag(line);
-      } else if(line.startsWith("field:")) {
+      } else if(line.startsWith("<field")) {
         parseFieldTag(line);
       }
     }
   }
 
   private void parseObjectTag(String line) {
-    String[] parts = line.split(":");
-    objectClass = parts[1];
+    Pattern pattern = Pattern.compile("class='([^']+)'");
+    Matcher matcher = pattern.matcher(line);
+    matcher.find();
+    objectClass = matcher.group(1);
   }
 
   private void parseFieldTag(String line) {
-    String[] parts = line.split(":");
-    String name = parts[2];
-    String type = parts[1];
-    String value = parts[3];
+    String name = "";
+    String type = "";
+    String value = "";
+    {
+      Pattern pattern = Pattern.compile(" (\\w+)='([^']+)'");
+      Matcher matcher = pattern.matcher(line);
+      while(matcher.find()) {
+        String k = matcher.group(1);
+        String v = matcher.group(2);
+        if(k.equals("name")) {
+          name = v;
+        } else if(k.equals("class")) {
+          type = v;
+        }
+      }
+    }
+    {
+      Pattern pattern = Pattern.compile(">([^<>]+)<");
+      Matcher matcher = pattern.matcher(line);
+      matcher.find();
+      value = matcher.group(1);
+    }
     fieldNames.add(name);
     fieldTypes.put(name, type);
     fieldValues.put(name, value);

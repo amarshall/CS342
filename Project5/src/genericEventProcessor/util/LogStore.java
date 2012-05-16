@@ -1,11 +1,11 @@
 package genericEventProcessor.util;
 
 public class LogStore extends SerializableObject {
-  private int foo;
-  private int bar;
+  private Integer foo;
+  private Integer bar;
 
-  public int getFoo() { return foo; }
-  public void setFoo(int foo) { this.foo = foo; }
-  public int getBar() { return bar; }
-  public void setBar(int bar) { this.bar = bar; }
+  public Integer getFoo() { return foo; }
+  public void setFoo(Integer foo) { this.foo = foo; }
+  public Integer getBar() { return bar; }
+  public void setBar(Integer bar) { this.bar = bar; }
 }
