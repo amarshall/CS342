@@ -5,7 +5,13 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import genericEventProcessor.eventDeserialization.EventDeserializer;
+import genericEventProcessor.eventDeserialization.PlainTextDeserializationStrategy;
+import genericEventProcessor.eventDeserialization.DeserializationStrategy;
+import genericEventProcessor.eventDeserialization.XMLDeserializationStrategy;
 import genericEventProcessor.eventSerialization.EventSerializer;
+import genericEventProcessor.eventSerialization.PlainTextSerializationStrategy;
+import genericEventProcessor.eventSerialization.SerializationStrategy;
+import genericEventProcessor.eventSerialization.XMLSerializationStrategy;
 import genericEventProcessor.server.execution.RemoteExecution;
 import genericEventProcessor.server.RemoteEvent;
 import genericEventProcessor.server.logger.RemoteLogger;
@@ -26,7 +32,7 @@ public class Client {
     LogStore store = new LogStore();
     store.setFoo(314);
     store.setBar(42);
-    ((RemoteLogger) serializedEvent).writeLogger(store, 117, "plaintext");
+    ((RemoteLogger) serializedEvent).writeLogger(store, 117, new PlainTextSerializationStrategy());
 
     // rest of the code for invoking methods on other interfaces using the
     // proxy reference
@@ -37,7 +43,7 @@ public class Client {
     }, new EventDeserializer());
 
     String data = readFile("117.txt");
-    LogStore anotherStore = (LogStore) ((RemoteLogger) deserializedEvent).readLogger(data, "plaintext");
+    LogStore anotherStore = (LogStore) ((RemoteLogger) deserializedEvent).readLogger(data, new PlainTextDeserializationStrategy());
     System.out.println(anotherStore.getFoo());
     System.out.println(anotherStore.getBar());
 

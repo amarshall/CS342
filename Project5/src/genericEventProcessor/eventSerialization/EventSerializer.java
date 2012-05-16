@@ -8,9 +8,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import genericEventProcessor.eventSerialization.PlainTextSerializationStrategy;
 import genericEventProcessor.eventSerialization.SerializationStrategy;
-import genericEventProcessor.eventSerialization.XMLSerializationStrategy;
 import genericEventProcessor.util.LogStore;
 import genericEventProcessor.util.SerializableObject;
 
@@ -20,17 +18,7 @@ public class EventSerializer implements InvocationHandler {
     Class klass = method.getDeclaringClass();
     SerializableObject object = (SerializableObject) args[0];
     Integer sequenceNumber = (Integer) args[1];
-    String format = (String) args[2];
-
-    SerializationStrategy serializer = null;
-    if(format.equals("xml")) {
-      serializer = new XMLSerializationStrategy();
-    } else if(format.equals("plaintext")) {
-      serializer = new PlainTextSerializationStrategy();
-    } else {
-      System.err.println("Invalid serialization format");
-      System.exit(1);
-    }
+    SerializationStrategy serializer = (SerializationStrategy)args[2];
 
     serializer.addObject(object);
 

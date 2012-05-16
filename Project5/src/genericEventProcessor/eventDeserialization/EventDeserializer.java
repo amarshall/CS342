@@ -11,24 +11,12 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import genericEventProcessor.eventDeserialization.DeserializationStrategy;
-import genericEventProcessor.eventDeserialization.PlainTextDeserializationStrategy;
-import genericEventProcessor.eventDeserialization.XMLDeserializationStrategy;
 
 public class EventDeserializer implements InvocationHandler {
   public Object invoke(Object o, Method m, Object[] args) {
     String input = (String)args[0];
-    String format = (String)args[1];
-
-    DeserializationStrategy deserializer = null;
-    if(format.equals("xml")) {
-      deserializer = new XMLDeserializationStrategy(input);
-    } else if(format.equals("plaintext")) {
-      deserializer = new PlainTextDeserializationStrategy(input);
-    } else {
-      System.err.println("Invalid serialization format");
-      System.exit(1);
-    }
-
+    DeserializationStrategy deserializer = (DeserializationStrategy)args[1];
+    deserializer.parse(input);
     Object object = null;
 
     try {

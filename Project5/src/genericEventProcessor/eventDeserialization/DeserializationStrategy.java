@@ -10,4 +10,5 @@ public interface DeserializationStrategy {
   public String fieldType(String fieldName);
   public String fieldValue(String fieldName);
   public String objectClass();
+  public void parse(String input);
 }

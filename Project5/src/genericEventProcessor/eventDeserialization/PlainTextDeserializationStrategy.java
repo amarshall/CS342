@@ -14,12 +14,22 @@ public class PlainTextDeserializationStrategy implements DeserializationStrategy
   private Map<String, String> fieldTypes;
   private Map<String, String> fieldValues;
 
-  public PlainTextDeserializationStrategy(String input) {
+  public PlainTextDeserializationStrategy() {
     objectClass = "";
     fieldNames = new HashSet<String>();
     fieldTypes = new HashMap<String, String>();
     fieldValues = new HashMap<String, String>();
-    parse(input);
+  }
+
+  public void parse(String input) {
+    String[] lines = input.split("\n");
+    for(String line : lines) {
+      if(line.startsWith("object:")) {
+        parseObjectTag(line);
+      } else if(line.startsWith("field:")) {
+        parseFieldTag(line);
+      }
+    }
   }
 
   public Set<String> fieldNames() {
@@ -36,17 +46,6 @@ public class PlainTextDeserializationStrategy implements DeserializationStrategy
 
   public String objectClass() {
     return objectClass;
-  }
-
-  private void parse(String input) {
-    String[] lines = input.split("\n");
-    for(String line : lines) {
-      if(line.startsWith("object:")) {
-        parseObjectTag(line);
-      } else if(line.startsWith("field:")) {
-        parseFieldTag(line);
-      }
-    }
   }
 
   private void parseObjectTag(String line) {
