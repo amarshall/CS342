@@ -5,11 +5,11 @@ Author: J. Andrew Marshall <jmarsha6@binghamton.edu>
 PURPOSE: Apply the design principles you have learned so far to develop and
          test code for the given problem. Apply the proxy and strategy patterns,
          and any other applicable pattern(s).
-PERCENT COMPLETE:
+PERCENT COMPLETE: 100%
 PARTS THAT ARE NOT COMPLETE: None
-BUGS:
-INPUT FORMAT:
-SAMPLE OUTPUT:
+BUGS: None
+INPUT FORMAT: (None)
+SAMPLE OUTPUT: (Should output nothing on success)
 TO COMPILE: ant compile
 TO RUN: ant run
 EXTRA CREDIT: n/a
