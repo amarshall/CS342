@@ -38,7 +38,7 @@ public class EventDeserializer implements InvocationHandler {
       e.printStackTrace();
       System.exit(1);
     } catch(IllegalAccessException e) {
-      System.err.println("Instantiation failure");
+      System.err.println("Illegal access");
       e.printStackTrace();
       System.exit(1);
     } catch(InstantiationException e) {
