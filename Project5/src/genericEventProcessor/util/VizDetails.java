@@ -2,12 +2,12 @@ package genericEventProcessor.util;
 
 public class VizDetails extends SerializableObject {
   private Integer foo;
-  private Integer bar;
+  private Double bar;
 
   public Integer getFoo() { return foo; }
   public void setFoo(Integer foo) { this.foo = foo; }
-  public Integer getBar() { return bar; }
-  public void setBar(Integer bar) { this.bar = bar; }
+  public Double getBar() { return bar; }
+  public void setBar(Double bar) { this.bar = bar; }
 
   public boolean equals(VizDetails other) {
     boolean equal = true;

@@ -33,7 +33,7 @@ public class Client {
       RemoteExecution serializedEvent = (RemoteExecution) pc.createProxy(classes, new EventSerializer());
       before = new ExecDetails();
       before.setFoo(314);
-      before.setBar(42);
+      before.setBar(true);
       serializedEvent.writeExecution(before, 117, new PlainTextSerializationStrategy());
 
       RemoteExecution deserializedEvent = (RemoteExecution) pc.createProxy(classes, new EventDeserializer());
@@ -48,8 +48,8 @@ public class Client {
 
       RemoteViz serializedEvent = (RemoteViz) pc.createProxy(classes, new EventSerializer());
       before = new VizDetails();
-      before.setFoo(314);
-      before.setBar(42);
+      before.setFoo(42);
+      before.setBar(3.14);
       serializedEvent.writeViz(before, 118, new PlainTextSerializationStrategy());
 
       RemoteViz deserializedEvent = (RemoteViz) pc.createProxy(classes, new EventDeserializer());
