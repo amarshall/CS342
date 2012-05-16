@@ -16,7 +16,7 @@ public class XMLDeserializationStrategy implements DeserializationStrategy {
   private Map<String, String> fieldTypes;
   private Map<String, String> fieldValues;
 
-  public XMLDeserializationStrategy(String input) {
+  public XMLDeserializationStrategy() {
     objectClass = "";
     fieldNames = new HashSet<String>();
     fieldTypes = new HashMap<String, String>();
