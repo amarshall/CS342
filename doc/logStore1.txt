@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EventSerialization xmlns="http://www.cs.binghamton.edu/~cs342/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ <complexType xsi:type="genericEventProcessor.util.LogStore">
+  <storeID xsi:type="xsd:int">17</storeID>
+  <dbConnection xsi:type="xsd:string">sqlserver.binghamton.edu:3456</dbConnection>
+ </complexType>
+  <param1 xsi:type="xsd:int">31</param1>
+  <param2 xsi:type="xsd:string">xml</param2>
+</EventSerialization>
